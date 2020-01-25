@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import { uuid } from 'uuid';
+import uuid from 'uuid/v4';
 
 const initialState = {
     todos: [
@@ -30,7 +30,7 @@ function reducer(state, { type, payload }){
                 ...state,
                 todos: [...state.todos, payload]
             };
-        case 'TOGGLE_TODO':
+        case 'TOOGLE_TODO':
             return {
                 ...state,
                 todos: state.todos.map(todo => (todo.id === payload) ? {...todo, complete: !todo.complete} : todo)  
@@ -50,12 +50,12 @@ export const addTodoAction = (todo) => ({
     payload: todo
 });
 
-export const toggleTodoAction = todoId => ({
+export const toggleTodoAction = (todoId) => ({
     type: 'TOOGLE_TODO',
     payload: todoId
 });
 
-export const deleteTodoAction = todoId => ({
+export const deleteTodoAction = (todoId) => ({
     type: 'DELETE_TODO',
-    payload: todo
+    payload: todoId
 })
